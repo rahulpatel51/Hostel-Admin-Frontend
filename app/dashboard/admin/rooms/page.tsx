@@ -32,6 +32,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { API_URL } from "@/lib/api"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -72,7 +73,7 @@ interface Block {
   image: string
 }
 
-const API_BASE_URL = "http://localhost:5000/api"
+const API_BASE_URL = `${API_URL}/api`
 
 export default function RoomPage() {
   const router = useRouter()

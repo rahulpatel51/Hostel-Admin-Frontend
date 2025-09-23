@@ -15,6 +15,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { format } from "date-fns"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { API_URL } from "@/lib/api"
 
 type Complaint = {
   _id: string
@@ -73,7 +74,7 @@ export default function ComplaintsManagementPage() {
   const fetchComplaints = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch("http://localhost:5000/api/admin/complaints", {
+      const response = await fetch(`${API_URL}/api/admin/complaints`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +126,7 @@ export default function ComplaintsManagementPage() {
   const fetchComplaintDetails = async (id: string) => {
     setIsFetchingDetails(true)
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/complaints/${id}`, {
+      const response = await fetch(`${API_URL}/api/admin/complaints/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -201,7 +202,7 @@ export default function ComplaintsManagementPage() {
   const updateStatus = async (id: string, newStatus: Complaint["status"]) => {
     setIsLoading(true)
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/complaints/${id}`, {
+      const response = await fetch(`${API_URL}/api/admin/complaints/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -250,7 +251,7 @@ export default function ComplaintsManagementPage() {
 
     setIsSubmittingComment(true)
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/complaints/${selectedComplaint._id}/comments`, {
+      const response = await fetch(`${API_URL}/api/admin/complaints/${selectedComplaint._id}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

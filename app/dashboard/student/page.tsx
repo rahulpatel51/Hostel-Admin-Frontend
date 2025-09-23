@@ -30,6 +30,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { format } from "date-fns"
 import axios from "axios"
 import { Textarea } from "@/components/ui/textarea"
+import { API_URL } from "@/lib/api"
 import {
   Dialog,
   DialogContent,
@@ -39,7 +40,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"
 
 type Complaint = {
   _id: string
@@ -172,7 +172,7 @@ export default function StudentDashboard() {
         if (!token) throw new Error("Authentication required")
 
         // Fetch student and room data using the same API as room-details-page
-        const studentRoomRes = await axios.get(`${API_BASE_URL}/student/room-info`, {
+        const studentRoomRes = await axios.get(`${API_URL}/api/student/room-info`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 
@@ -182,25 +182,25 @@ export default function StudentDashboard() {
 
           // Fetch other data
           // Fetch complaints
-          const complaintsRes = await axios.get(`${API_BASE_URL}/student/complaints`, {
+          const complaintsRes = await axios.get(`${API_URL}/api/student/complaints`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           setComplaints(complaintsRes.data.data || [])
 
           // Fetch leave applications
-          const leavesRes = await axios.get(`${API_BASE_URL}/student/leave`, {
+          const leavesRes = await axios.get(`${API_URL}/api/student/leave`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           setLeaveApplications(leavesRes.data.data || [])
 
           // Fetch notices
-          const noticesRes = await axios.get(`${API_BASE_URL}/notices`, {
+          const noticesRes = await axios.get(`${API_URL}/api/notices`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           setNotices(noticesRes.data.data || [])
 
           // Fetch mess menu
-          const menuRes = await axios.get(`${API_BASE_URL}/menu`, {
+          const menuRes = await axios.get(`${API_URL}/api/menu`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           const processedData = menuRes.data.data.map((item: MenuItem) => ({
@@ -360,7 +360,7 @@ export default function StudentDashboard() {
       const token = localStorage.getItem("token") || ""
 
       const response = await axios.post(
-        `${API_BASE_URL}/menu/${currentMenuItem._id}/reviews`,
+        `${API_URL}/api/menu/${currentMenuItem._id}/reviews`,
         {
           comment: studentComment,
           rating: studentRating,

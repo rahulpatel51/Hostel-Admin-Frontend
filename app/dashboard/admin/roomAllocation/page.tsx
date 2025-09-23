@@ -34,6 +34,7 @@ import { toast } from "@/components/ui/use-toast"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet"
 import { Checkbox } from "@/components/ui/checkbox"
+import { API_URL } from "@/lib/api"
 
 // Types
 interface Student {
@@ -62,7 +63,6 @@ interface Room {
   occupants: Student[]
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
 export default function RoomAllocationPage() {
   // State
@@ -89,7 +89,7 @@ export default function RoomAllocationPage() {
   const fetchStudents = async () => {
     try {
       setLoading((prev) => ({ ...prev, students: true }))
-      const res = await fetch(`${API_BASE}/api/room-allocation/students`)
+      const res = await fetch(`${API_URL}/api/room-allocation/students`)
       if (!res.ok) throw new Error("Failed to fetch students")
       const data = await res.json()
       setStudents(data)
@@ -108,7 +108,7 @@ export default function RoomAllocationPage() {
   const fetchRooms = async () => {
     try {
       setLoading((prev) => ({ ...prev, rooms: true }))
-      const res = await fetch(`${API_BASE}/api/room-allocation/rooms`)
+      const res = await fetch(`${API_URL}/api/room-allocation/rooms`)
       if (!res.ok) throw new Error("Failed to fetch rooms")
       const data = await res.json()
       setRooms(data)
@@ -157,7 +157,7 @@ export default function RoomAllocationPage() {
     setLoading((prev) => ({ ...prev, action: true }))
 
     try {
-      const response = await fetch(`${API_BASE}/api/room-allocation/allocate`, {
+      const response = await fetch(`${API_URL}/api/room-allocation/allocate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -204,7 +204,7 @@ export default function RoomAllocationPage() {
     setLoading((prev) => ({ ...prev, action: true }))
 
     try {
-      const response = await fetch(`${API_BASE}/api/room-allocation/deallocate`, {
+      const response = await fetch(`${API_URL}/api/room-allocation/deallocate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -254,7 +254,7 @@ export default function RoomAllocationPage() {
       // For this example, we'll use Promise.all to make multiple requests
       await Promise.all(
         selectedStudentsForDeallocation.map((studentId) =>
-          fetch(`${API_BASE}/api/room-allocation/deallocate`, {
+          fetch(`${API_URL}/api/room-allocation/deallocate`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

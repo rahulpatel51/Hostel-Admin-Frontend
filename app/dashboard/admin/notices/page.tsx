@@ -38,6 +38,7 @@ import { Progress } from "@/components/ui/progress"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
+import { API_URL } from "@/lib/api"
 
 type Notice = {
   _id: string
@@ -57,7 +58,7 @@ type Notice = {
   updatedAt: string
 }
 
-const API_BASE_URL = "http://localhost:5000/api/notices"
+const API_BASE_URL = `${API_URL}/api/notices`
 
 // Create axios instance with interceptors
 const api = axios.create({

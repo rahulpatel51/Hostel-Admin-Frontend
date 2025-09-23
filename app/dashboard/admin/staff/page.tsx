@@ -22,10 +22,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
+import { API_URL } from "@/lib/api"
 
 // Configure Axios instance
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/admin",
+  baseURL: `${API_URL}/api/admin`,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

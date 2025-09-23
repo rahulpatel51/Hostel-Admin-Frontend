@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/components/ui/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { jsPDF } from 'jspdf';
+import { API_URL } from "@/lib/api"
 
 // Extend jsPDF to include lastAutoTable
 declare module 'jspdf' {
@@ -52,7 +53,7 @@ export default function HostelAttendancePage() {
         setIsLoading(true);
         
         // Fetch student info
-        const studentRes = await fetch('http://localhost:5000/api/student/profile', {
+        const studentRes = await fetch(`${API_URL}/api/student/profile`, {
           credentials: 'include'
         });
         const studentData = await studentRes.json();
@@ -67,7 +68,7 @@ export default function HostelAttendancePage() {
         }
 
         // Fetch attendance records
-        const attendanceRes = await fetch('http://localhost:5000/api/student/attendance', {
+        const attendanceRes = await fetch(`${API_URL}/api/student/attendance`, {
           credentials: 'include'
         });
         const attendanceData = await attendanceRes.json();
@@ -179,7 +180,6 @@ export default function HostelAttendancePage() {
       const record = attendanceData[dateStr];
       
       days.push({
-        date: dateStr,
         dayOfMonth: day,
         ...record
       });

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { API_URL } from "@/lib/api"
 import {
   Dialog,
   DialogContent,
@@ -58,7 +59,7 @@ interface FeeRecord {
   receiptNumber?: string
 }
 
-const API_BASE_URL = "http://localhost:5000/api/admin/students"
+const API_BASE_URL = `${API_URL}/api/admin/students`
 
 export default function StudentManagementPage() {
   const router = useRouter()

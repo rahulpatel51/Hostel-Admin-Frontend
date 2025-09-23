@@ -13,6 +13,7 @@ import { Mail, Phone, User, Lock, Shield, SettingsIcon, KeyRound, Edit, ImageIco
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { API_URL } from "@/lib/api"
 
 interface AdminProfile {
   _id: string;
@@ -91,7 +92,7 @@ export default function SettingsPage() {
           return;
         }
 
-        const response = await axios.get<ApiResponse>("http://localhost:5000/api/auth/me", {
+        const response = await axios.get<ApiResponse>(`${API_URL}/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -148,12 +149,7 @@ export default function SettingsPage() {
       setTempImage(URL.createObjectURL(file));
       
       try {
-        // In a real app, you would upload to your server here
-        // const formData = new FormData();
-        // formData.append('image', file);
-        // const response = await axios.post('/api/upload', formData);
-        
-        // Simulate upload delay
+                                               // Simulate upload delay
         await new Promise(resolve => setTimeout(resolve, 1000));
         
         // For demo purposes, we'll just use the temp URL
@@ -186,7 +182,7 @@ export default function SettingsPage() {
       }
 
       const response = await axios.put<ApiResponse>(
-        "http://localhost:5000/api/auth/update-profile",
+        `${API_URL}/api/auth/update-profile`,
         {
           firstName: adminProfile.firstName,
           lastName: adminProfile.lastName,
@@ -241,7 +237,7 @@ export default function SettingsPage() {
       }
 
       const response = await axios.put(
-        "http://localhost:5000/api/auth/change-password",
+        `${API_URL}/api/auth/change-password`,
         {
           currentPassword: passwordData.currentPassword,
           newPassword: passwordData.newPassword

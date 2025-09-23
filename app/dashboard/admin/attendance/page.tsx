@@ -11,6 +11,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
+import { API_URL } from "@/lib/api"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -80,7 +81,7 @@ export default function AttendancePage() {
     if (!token) return []
 
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/attendance/${date}`, {
+      const res = await fetch(`${API_URL}/api/admin/attendance/${date}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +113,7 @@ export default function AttendancePage() {
     if (!token) return []
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/attendance/dates/all", {
+      const res = await fetch(`${API_URL}/api/admin/attendance/dates/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -139,7 +140,7 @@ export default function AttendancePage() {
     if (!token) return []
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/students", {
+      const res = await fetch(`${API_URL}/api/admin/students`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -267,7 +268,7 @@ export default function AttendancePage() {
 
     setIsSubmitting(true)
     try {
-      const response = await fetch("http://localhost:5000/api/admin/attendance", {
+      const response = await fetch(`${API_URL}/api/admin/attendance`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

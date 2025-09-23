@@ -35,6 +35,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
+import { API_URL } from "@/lib/api"
 
 type Student = {
   _id: string
@@ -187,7 +188,7 @@ export default function LeaveApprovalsPage({ onActionComplete }: { onActionCompl
       try {
         const token = localStorage.getItem("adminToken")
 
-        const response = await fetch("http://localhost:5000/api/admin/leave", {
+        const response = await fetch(`${API_URL}/api/admin/leave`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -293,7 +294,7 @@ export default function LeaveApprovalsPage({ onActionComplete }: { onActionCompl
     try {
       const token = localStorage.getItem("adminToken")
 
-      const response = await fetch(`http://localhost:5000/api/admin/leave/${id}`, {
+      const response = await fetch(`${API_URL}/api/admin/leave/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
