@@ -22,6 +22,7 @@ import { toast } from "sonner"
 import { Skeleton } from "@/components/ui/skeleton"
 import axios from "axios"
 import { Badge } from "@/components/ui/badge"
+import { API_URL } from "@/lib/api"
 
 interface AdminProfile {
   _id: string
@@ -63,7 +64,7 @@ export default function AdminDashboardLayout({
   const [showNotifications, setShowNotifications] = useState(false)
   const router = useRouter()
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || `${API_URL}/api`
 
   const fetchAdminProfile = async () => {
     try {
