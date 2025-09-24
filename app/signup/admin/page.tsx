@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import axios from "axios";
+import { API_URL } from "@/lib/api"
 
 export default function AdminSignupPage() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function AdminSignupPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register/admin",
+        `${API_URL}/api/auth/register/admin`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
