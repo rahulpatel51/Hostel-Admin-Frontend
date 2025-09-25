@@ -71,15 +71,26 @@ export default function WardenLoginPage() {
       return
     }
 
-    // Any email/password will work
-    localStorage.setItem("token", "simulated-token-for-warden-access")
+    // Check if credentials match demo credentials
+    if (formData.email === demoCredentials.email && formData.password === demoCredentials.password) {
+      // Demo credentials - allow login
+      localStorage.setItem("token", "simulated-token-for-warden-access")
+      
+      toast({
+        title: "Login Successful",
+        description: "Welcome to the Warden Dashboard",
+      })
+      
+      router.push("/dashboard/warden")
+    } else {
+      // Invalid credentials - show error
+      toast({
+        title: "Invalid Credentials",
+        description: "Please use the demo credentials provided",
+        variant: "destructive"
+      })
+    }
     
-    toast({
-      title: "Login Successful",
-      description: "Welcome to the Warden Dashboard",
-    })
-    
-    router.push("/dashboard/warden")
     setIsLoading(false)
   }
 
@@ -197,7 +208,7 @@ export default function WardenLoginPage() {
               <div>
                 <h4 className="font-medium text-amber-800 dark:text-amber-300 text-sm">Security Notice</h4>
                 <p className="text-xs text-amber-700/80 dark:text-amber-400/80 mt-1">
-                  This is a demo portal. For security, use unique passwords in production environment.
+                  This is a demo portal. Only demo credentials will work for login.
                 </p>
               </div>
             </div>

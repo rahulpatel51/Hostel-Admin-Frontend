@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import axios from "axios"
+import { API_URL } from "@/lib/api"
 
 interface Room {
   _id: string
@@ -67,7 +68,7 @@ export default function StudentProfilePage() {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token")
-        const response = await axios.get("http://localhost:5000/api/student/profile", {
+        const response = await axios.get(`${API_URL}/api/student/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -135,7 +136,7 @@ export default function StudentProfilePage() {
     try {
       const token = localStorage.getItem("token")
       const response = await axios.put(
-        `http://localhost:5000/api/student/profile`,
+        `${API_URL}/api/student/profile`,
         {
           phone: editProfile.phone || profile.phone,
           address: editProfile.address || profile.address,
@@ -202,7 +203,7 @@ export default function StudentProfilePage() {
     try {
       const token = localStorage.getItem("token")
       await axios.put(
-        "http://localhost:5000/api/student/change-password",
+        `${API_URL}/api/student/change-password`,
         { currentPassword, newPassword },
         {
           headers: {
