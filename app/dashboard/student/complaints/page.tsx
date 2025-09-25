@@ -12,6 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { API_URL } from "@/lib/api"
 
 type Complaint = {
   _id: string;
@@ -66,7 +67,7 @@ export default function StudentComplaintsPage() {
   const fetchComplaints = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/student/complaints', {
+      const response = await fetch(`${API_URL}/api/student/complaints`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +118,7 @@ export default function StudentComplaintsPage() {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/student/complaints', {
+      const response = await fetch(`${API_URL}/api/student/complaints`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -180,7 +181,7 @@ export default function StudentComplaintsPage() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/student/complaints/${selectedComplaint._id}/comments`,
+        `${API_URL}/api/student/complaints/${selectedComplaint._id}/comments`,
         {
           method: 'POST',
           headers: {

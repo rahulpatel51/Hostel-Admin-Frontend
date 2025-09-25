@@ -30,6 +30,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar"
 import { format, isBefore } from "date-fns"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { API_URL } from "@/lib/api"
 
 interface LeaveApplication {
   _id: string
@@ -106,7 +107,7 @@ export default function StudentLeavePage() {
   const fetchLeaveApplications = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch("http://localhost:5000/api/student/leave", {
+      const response = await fetch(`${API_URL}/api/student/leave`, {
         credentials: "include",
       })
 
@@ -179,8 +180,8 @@ export default function StudentLeavePage() {
     setIsLoading(true)
     try {
       const url = editingId
-        ? `http://localhost:5000/api/student/leave/${editingId}/edit`
-        : "http://localhost:5000/api/student/leave"
+        ? `${API_URL}/api/student/leave/${editingId}/edit`
+        : `${API_URL}/api/student/leave`
 
       const method = editingId ? "PUT" : "POST"
 
@@ -266,7 +267,7 @@ export default function StudentLeavePage() {
 
     setIsLoading(true)
     try {
-      const response = await fetch(`http://localhost:5000/api/student/leave/${id}/delete`, {
+      const response = await fetch(`${API_URL}/api/student/leave/${id}/delete`, {
         method: "DELETE",
         credentials: "include",
       })

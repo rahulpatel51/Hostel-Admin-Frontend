@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { API_URL } from "@/lib/api"
 
 interface Student {
   _id: string;
@@ -89,7 +90,7 @@ export default function RoomDetailsPage() {
         throw new Error('No authentication token found');
       }
 
-      const response = await axios.get<ApiResponse>('http://localhost:5000/api/student/room-info', {
+      const response = await axios.get<ApiResponse>(`${API_URL}/api/student/room-info`, {
         headers: { 
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

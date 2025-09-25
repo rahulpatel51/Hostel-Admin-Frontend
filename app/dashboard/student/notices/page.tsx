@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useToast } from "@/components/ui/use-toast"
 import axios from "axios"
 import { cn } from "@/lib/utils"
+import { API_URL } from "@/lib/api"
 
 type Notice = {
   _id: string
@@ -59,7 +60,7 @@ export default function StudentNoticesPage() {
           throw new Error("Authentication required")
         }
 
-        const response = await axios.get("http://localhost:5000/api/notices", {
+        const response = await axios.get(`${API_URL}/api/notices`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

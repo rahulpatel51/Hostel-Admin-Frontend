@@ -9,8 +9,9 @@ import { Star, Utensils, MessageSquare, ChevronDown, ChevronUp, AlertCircle, Che
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { API_URL } from "@/lib/api"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || `${API_URL}/api`;
 
 interface Review {
   _id: string;
