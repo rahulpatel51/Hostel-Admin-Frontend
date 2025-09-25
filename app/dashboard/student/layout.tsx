@@ -35,6 +35,7 @@ import axios from "axios"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
+import { API_URL } from "@/lib/api"
 
 interface StudentProfile {
   _id: string
@@ -154,7 +155,7 @@ export default function StudentDashboardLayout({
           throw new Error("No authentication token found")
         }
 
-        const profileResponse = await axios.get("http://localhost:5000/api/student/profile", {
+        const profileResponse = await axios.get(`${API_URL}/api/student/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
