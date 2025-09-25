@@ -11,7 +11,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { API_URL } from "@/lib/api"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || `${API_URL}/api`;
 
 interface Review {
   _id: string;
@@ -75,7 +74,7 @@ export default function StudentMessMenuPage() {
     const fetchMenuData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${API_BASE_URL}/menu`);
+        const response = await fetch(`${API_URL}/api/menu`);
         if (!response.ok) {
           throw new Error('Failed to fetch menu data');
         }
@@ -133,7 +132,7 @@ export default function StudentMessMenuPage() {
     try {
       const token = localStorage.getItem('token') || '';
       
-      const response = await fetch(`${API_BASE_URL}/menu/${currentMenuItem._id}/reviews`, {
+      const response = await fetch(`${API_URL}/api/menu/${currentMenuItem._id}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
